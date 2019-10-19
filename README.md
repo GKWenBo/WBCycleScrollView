@@ -1,0 +1,2 @@
+# WBCycleScrollView
+无限轮播视图，可设置左右间距，参考SDCycleScrollView实现原理
