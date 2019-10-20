@@ -197,6 +197,9 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     
     _totalItemsCount = self.infiniteLoop ? imagePathsGroup.count * 100 : imagePathsGroup.count;
     
+    //图片张数大于0，隐藏背景视图
+    self.backgroundImageView.hidden = imagePathsGroup.count > 0 ? YES : NO;
+    
     if (imagePathsGroup.count > 1) {
         self.mainView.scrollEnabled = YES;
         [self setAutoScroll:self.autoScroll];
@@ -409,9 +412,12 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     //解决清除timer时偶尔会出现的问题
     if (!self.imagePathsGroup.count) return;
     
-//    int itemIndex = [self currentIndex];
-//    int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
+    int itemIndex = [self currentIndex];
+    int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
     
+    if ([self.delegate respondsToSelector:@selector(cycleScrollView:didScrollToIndex:)]) {
+        [self.delegate cycleScrollView:self didScrollToIndex:indexOnPageControl];
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -436,12 +442,12 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     //解决清除timer时偶尔会出现的问题
     if (!self.imagePathsGroup.count) return;
     
-    int itemIndex = [self currentIndex];
-    int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
-    
-    if ([self.delegate respondsToSelector:@selector(cycleScrollView:didScrollToIndex:)]) {
-        [self.delegate cycleScrollView:self didScrollToIndex:indexOnPageControl];
-    }
+//    int itemIndex = [self currentIndex];
+//    int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
+//
+//    if ([self.delegate respondsToSelector:@selector(cycleScrollView:didScrollToIndex:)]) {
+//        [self.delegate cycleScrollView:self didScrollToIndex:indexOnPageControl];
+//    }
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
@@ -454,10 +460,10 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
         CGFloat moveWidth = currentPointX - _lastOffset.x;
         NSInteger shouldPage = moveWidth / (self.flowLayout.itemSize.width / 2);
         if (velocity.x > 0 || shouldPage > 0) {
-            //右滑
+            //左滑
             _dragDirection = 1;
         }else if (velocity.x < 0 || shouldPage < 0) {
-            //左滑
+            //右滑
             _dragDirection = -1;
         }else {
             _dragDirection = 0;
@@ -474,10 +480,10 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
         CGFloat moveHeight = currentPointY - _lastOffset.y;
         NSInteger shouldPage = moveHeight / (self.flowLayout.itemSize.height / 2);
         if (velocity.y > 0 || shouldPage > 0) {
-            //右滑
+            //上滑
             _dragDirection = 1;
         }else if (velocity.y < 0 || shouldPage < 0) {
-            //左滑
+            //下滑
             _dragDirection = -1;
         }else {
             _dragDirection = 0;
