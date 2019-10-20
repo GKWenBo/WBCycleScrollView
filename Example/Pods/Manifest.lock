@@ -1,7 +1,7 @@
 PODS:
-  - SDWebImage (5.0.0):
-    - SDWebImage/Core (= 5.0.0)
-  - SDWebImage/Core (5.0.0)
+  - SDWebImage (5.2.3):
+    - SDWebImage/Core (= 5.2.3)
+  - SDWebImage/Core (5.2.3)
   - WBCycleScrollView (0.1.0):
     - SDWebImage (>= 5.0.0)
 
@@ -17,8 +17,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SDWebImage: 5de80a0302de9e377e62f47d2fa1304efff0e55f
-  WBCycleScrollView: 640d2f6c9ca7a456ac909d1de7b39b6e6f73159c
+  SDWebImage: 46a7f73228f84ce80990c786e4372cf4db5875ce
+  WBCycleScrollView: 59c9fb06898b4da522764444e6e6e18d647ce234
 
 PODFILE CHECKSUM: 38f1b8cdacb4745d72f86ab49956cd0c81daf7a7
 
