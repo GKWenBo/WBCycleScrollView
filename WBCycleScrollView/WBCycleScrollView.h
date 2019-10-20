@@ -110,6 +110,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGSize itemSize;
 /** cell大小间距 默认：0 */
 @property (nonatomic, assign) CGFloat itemSpacing;
+/** 是否分页 默认：NO 非infiniteLoop设置有效 */
+@property (nonatomic, assign) BOOL pagingEnabed;
 
 /** 滚动手势禁用（文字轮播较实用） */
 - (void)disableScrollGesture;

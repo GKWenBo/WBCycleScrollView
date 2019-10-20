@@ -73,6 +73,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     _itemSpacing = 0;
     _autoScroll = YES;
     _infiniteLoop = YES;
+    _pagingEnabed = NO;
     _bannerImageViewContentMode = UIViewContentModeScaleToFill;
     self.backgroundColor = [UIColor lightGrayColor];
 }
@@ -86,7 +87,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     
     UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
     mainView.backgroundColor = [UIColor clearColor];
-    mainView.pagingEnabled = YES;
+    mainView.pagingEnabled = _pagingEnabed;;
     mainView.showsHorizontalScrollIndicator = NO;
     mainView.showsVerticalScrollIndicator = NO;
     [mainView registerClass:[WBCycleScrollViewCell class] forCellWithReuseIdentifier:kIdentifier];
@@ -126,7 +127,6 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
         
         
         _lastOffset = self.mainView.contentOffset;
-        self.mainView.userInteractionEnabled = YES;
     }
 }
 
@@ -250,6 +250,13 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     _isZoom = isZoom;
     
     self.flowLayout.isZoom = isZoom;
+}
+
+- (void)setPagingEnabed:(BOOL)pageEnabed {
+    _pagingEnabed = pageEnabed;
+    if (!self.infiniteLoop) {
+        self.mainView.pagingEnabled = pageEnabed;
+    }
 }
 
 // MARK: Private Method
@@ -408,7 +415,6 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
 
 // MARK: UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    self.mainView.userInteractionEnabled = NO;
     //解决清除timer时偶尔会出现的问题
     if (!self.imagePathsGroup.count) return;
     
@@ -438,7 +444,6 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    self.mainView.userInteractionEnabled = YES;
     //解决清除timer时偶尔会出现的问题
     if (!self.imagePathsGroup.count) return;
     
@@ -469,7 +474,6 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
             _dragDirection = 0;
         }
         
-         self.mainView.userInteractionEnabled = NO;
         NSInteger currentIndex = (_lastOffset.x + (self.flowLayout.itemSize.width + self.flowLayout.minimumLineSpacing) * 0.5) / (self.itemSpacing + self.itemSize.width);
         [self.mainView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:currentIndex + _dragDirection inSection:0]
                               atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
@@ -489,7 +493,6 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
             _dragDirection = 0;
         }
         
-        self.mainView.userInteractionEnabled = NO;
         NSInteger currentIndex = (_lastOffset.y + (self.flowLayout.itemSize.height + self.flowLayout.minimumLineSpacing) * 0.5) / (self.flowLayout.minimumLineSpacing + self.flowLayout.itemSize.height);
         [self.mainView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:currentIndex + _dragDirection inSection:0]
                               atScrollPosition:UICollectionViewScrollPositionCenteredVertically
