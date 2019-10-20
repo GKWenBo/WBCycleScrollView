@@ -7,7 +7,7 @@
 
 - CocoaPods
 
-  `pod 'MJRefresh'`
+  `pod 'WBCycleScrollView'`
 
 - 手动导入
 
