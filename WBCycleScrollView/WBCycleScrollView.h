@@ -60,6 +60,12 @@ NS_ASSUME_NONNULL_BEGIN
                forIndex:(NSInteger)index
         cycleScrollView:(WBCycleScrollView *)view;
 
+/// 滚动偏移量回调
+/// @param offsetX 偏移量
+/// @param view view description
+- (void)cycScrollViewScrollOffset:(NSInteger)offsetX
+                  cycleScrollView:(WBCycleScrollView *)view;
+
 @end
 
 

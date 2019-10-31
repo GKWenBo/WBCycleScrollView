@@ -8,8 +8,13 @@
 
 #import "WBViewController.h"
 #import <WBCycleScrollView.h>
+#import "UIColor+MyExtension.h"
 
 @interface WBViewController () <WBCycleScrollViewDelegate>
+
+@property (nonatomic, strong) NSMutableArray *changeColors;
+
+@property (nonatomic, strong) UIView *colorView;
 
 @end
 
@@ -37,20 +42,65 @@
     cycleScrollView2.itemSize = CGSizeMake(w - 20, 180);
     cycleScrollView2.itemSpacing = 10;
     cycleScrollView2.imageViewCornerRadius = 6;
+    cycleScrollView2.autoScrollTimeInterval = 5;
     cycleScrollView2.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     cycleScrollView2.isZoom = NO;
     
     [self.view addSubview:cycleScrollView2];
+    
+    _colorView = [UIView new];
+    _colorView.frame = CGRectMake(0, 0, w, 200);
+    _colorView.backgroundColor = self.changeColors[0];
+    [self.view addSubview:_colorView];
 }
 
 - (void)cycleScrollView:(WBCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index {
     NSLog(@"%ld", index);
 }
 
+- (void)cycScrollViewScrollOffset:(NSInteger)offsetX cycleScrollView:(WBCycleScrollView *)view {
+    [self handelBannerBgColorWithOffset:offsetX];
+}
+
+//根据偏移量计算设置banner背景颜色
+- (void)handelBannerBgColorWithOffset:(NSInteger )offset {
+    if (1 == self.changeColors.count) return;
+    NSInteger offsetCurrent = offset % (int)(self.view.bounds.size.width - 20);
+    float rate = offsetCurrent / (int)(self.view.bounds.size.width - 20);
+    NSLog(@"rate  = %f", rate);
+    NSInteger currentPage = offset / (int)(self.view.bounds.size.width - 20);
+    UIColor *startPageColor;
+    UIColor *endPageColor;
+    if (currentPage == self.changeColors.count - 1) {
+        startPageColor = self.changeColors[currentPage];
+        endPageColor = self.changeColors[0];
+    } else {
+        if (currentPage  == self.changeColors.count) {
+            return;
+        }
+        startPageColor = self.changeColors[currentPage];
+        endPageColor = self.changeColors[currentPage + 1];
+    }
+    UIColor *currentToLastColor = [UIColor getColorWithColor:startPageColor andCoe:rate andEndColor:endPageColor];
+    self.colorView.backgroundColor = currentToLastColor;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSMutableArray *)changeColors {
+    if (!_changeColors) {
+        UIColor *oneColor   = [UIColor colorWithHexString:@"#FDC0BC" alpha:1.0];
+        UIColor *twoColor   = [UIColor colorWithHexString:@"#CBC1FF" alpha:1.0];
+        UIColor *threeColor = [UIColor colorWithHexString:@"#C8CFA2" alpha:1.0];
+//        UIColor *fourColor  = [UIColor colorWithHexString:@"#CBC1FF" alpha:1.0];
+//        UIColor *fiveColor  = [UIColor colorWithHexString:@"#C8CFA2" alpha:1.0];
+        _changeColors = [[NSMutableArray alloc]initWithArray:@[oneColor,twoColor,threeColor]];
+    }
+    return _changeColors;
 }
 
 @end

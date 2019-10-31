@@ -418,6 +418,21 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     //解决清除timer时偶尔会出现的问题
     if (!self.imagePathsGroup.count) return;
     
+    //滚动偏移量
+    CGFloat totalImagewidth = self.bounds.size.width * self.imagePathsGroup.count;
+    CGFloat currentOffset = _mainView.contentOffset.x - self.bounds.size.width * 50 * self.imagePathsGroup.count;
+    CGFloat realOffset;
+    if (currentOffset > 0) {
+        realOffset = (int)currentOffset % (int)totalImagewidth;
+    } else {
+        realOffset = (int)currentOffset % (int)totalImagewidth + totalImagewidth;
+    }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cycScrollViewScrollOffset:cycleScrollView:)]) {
+        [self.delegate cycScrollViewScrollOffset:(int)realOffset
+                                 cycleScrollView:self];
+    }
+    
     int itemIndex = [self currentIndex];
     int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
     

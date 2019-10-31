@@ -23,6 +23,7 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		D0C123C0236B124600360E45 /* UIColor+MyExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C123BE236B124600360E45 /* UIColor+MyExtension.m */; };
 		E818CF98FA35C68E3864A625 /* Pods_WBCycleScrollView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57093553DC9EA637E86577C8 /* Pods_WBCycleScrollView_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,8 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ADD2209ABEC4AA3AC0AFC4B0 /* Pods_WBCycleScrollView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WBCycleScrollView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0C123BE236B124600360E45 /* UIColor+MyExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MyExtension.m"; sourceTree = "<group>"; };
+		D0C123BF236B124600360E45 /* UIColor+MyExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MyExtension.h"; sourceTree = "<group>"; };
 		D732DDFC96FD39038099238C /* WBCycleScrollView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WBCycleScrollView.podspec; path = ../WBCycleScrollView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D8DE124C5A8911406AF96124 /* Pods-WBCycleScrollView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WBCycleScrollView_Tests.release.xcconfig"; path = "Target Support Files/Pods-WBCycleScrollView_Tests/Pods-WBCycleScrollView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +135,8 @@
 		6003F593195388D20070C39A /* Example for WBCycleScrollView */ = {
 			isa = PBXGroup;
 			children = (
+				D0C123BF236B124600360E45 /* UIColor+MyExtension.h */,
+				D0C123BE236B124600360E45 /* UIColor+MyExtension.m */,
 				6003F59C195388D20070C39A /* WBAppDelegate.h */,
 				6003F59D195388D20070C39A /* WBAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -369,6 +374,7 @@
 				6003F59E195388D20070C39A /* WBAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* WBViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				D0C123C0236B124600360E45 /* UIColor+MyExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
