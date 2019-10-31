@@ -65,10 +65,12 @@
 //根据偏移量计算设置banner背景颜色
 - (void)handelBannerBgColorWithOffset:(NSInteger )offset {
     if (1 == self.changeColors.count) return;
-    NSInteger offsetCurrent = offset % (int)(self.view.bounds.size.width - 20);
-    float rate = offsetCurrent / (int)(self.view.bounds.size.width - 20);
+    NSInteger offsetCurrent = offset % (int)(self.view.bounds.size.width - 10);
+    float rate = offsetCurrent / (self.view.bounds.size.width - 10);
+    NSLog(@"offset  = %ld", offset);
     NSLog(@"rate  = %f", rate);
-    NSInteger currentPage = offset / (int)(self.view.bounds.size.width - 20);
+    NSInteger currentPage = offset / (int)(self.view.bounds.size.width - 10);
+    NSLog(@"currentPage  = %ld", currentPage);
     UIColor *startPageColor;
     UIColor *endPageColor;
     if (currentPage == self.changeColors.count - 1) {
