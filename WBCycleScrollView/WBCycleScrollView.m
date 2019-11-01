@@ -269,6 +269,8 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
 }
 
 - (void)invalidateTimer {
+    if (!self.autoScroll) return;
+    
     [_timer invalidate];
     _timer = nil;
 }
@@ -352,9 +354,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
 }
 
 - (void)makeScrollViewScrollToIndex:(NSInteger)index {
-    if (self.autoScroll) {
-        [self invalidateTimer];
-    }
+    [self invalidateTimer];
     
     if (0 == _totalItemsCount) return;
     
@@ -452,9 +452,8 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     _lastOffset = scrollView.contentOffset;
-    if (self.autoScroll) {
-        [self invalidateTimer];
-    }
+    
+    [self invalidateTimer];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {

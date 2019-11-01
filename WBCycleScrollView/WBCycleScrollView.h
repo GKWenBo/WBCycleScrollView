@@ -126,6 +126,12 @@ NS_ASSUME_NONNULL_BEGIN
 /** 滚动手势禁用（文字轮播较实用） */
 - (void)disableScrollGesture;
 
+/// 销毁定时器
+- (void)invalidateTimer;
+
+/// 开始定时器
+- (void)setupTimer;
+
 /** 清除图片缓存（此次升级后统一使用SDWebImage管理图片加载和缓存）  */
 + (void)clearImagesCache;
 
