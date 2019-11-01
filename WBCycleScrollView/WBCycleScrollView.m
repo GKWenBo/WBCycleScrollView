@@ -127,7 +127,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
         
         
         _lastOffset = self.mainView.contentOffset;
-        self.mainView.userInteractionEnabled = YES;
+//        self.mainView.userInteractionEnabled = YES;
     }
 }
 
@@ -416,11 +416,11 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     //解决清除timer时偶尔会出现的问题
     if (!self.imagePathsGroup.count) return;
     
-    self.mainView.userInteractionEnabled = NO;
+//    self.mainView.userInteractionEnabled = NO;
     
     //滚动偏移量
     CGFloat totalImagewidth = (self.flowLayout.itemSize.width + self.flowLayout.minimumLineSpacing) * self.imagePathsGroup.count;
-    CGFloat currentOffset = _mainView.contentOffset.x - (self.flowLayout.itemSize.width + self.flowLayout.minimumLineSpacing) * 50 * self.imagePathsGroup.count + self.flowLayout.minimumLineSpacing * 0.99;
+    CGFloat currentOffset = _mainView.contentOffset.x - (self.flowLayout.itemSize.width + self.flowLayout.minimumLineSpacing) * 50 * self.imagePathsGroup.count + self.flowLayout.minimumLineSpacing;
     CGFloat realOffset;
     if (currentOffset > 0) {
         realOffset = (int)currentOffset % (int)totalImagewidth;
@@ -429,7 +429,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     }
     ///步距
     CGFloat OneStepW = (int)(self.flowLayout.itemSize.width + self.flowLayout.minimumLineSpacing);
-    NSInteger offsetCurrent = (int)realOffset %(int)OneStepW;
+    NSInteger offsetCurrent = (int)realOffset % (int)OneStepW;
     ///滑动进度
     CGFloat scrollRate = offsetCurrent / OneStepW;
     ///当前页
@@ -468,7 +468,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    self.mainView.userInteractionEnabled = YES;
+//    self.mainView.userInteractionEnabled = YES;
     //解决清除timer时偶尔会出现的问题
     if (!self.imagePathsGroup.count) return;
     
@@ -498,7 +498,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
         }else {
             _dragDirection = 0;
         }
-        self.mainView.userInteractionEnabled = NO;
+//        self.mainView.userInteractionEnabled = NO;
         
         NSInteger currentIndex = (_lastOffset.x + (self.flowLayout.itemSize.width + self.flowLayout.minimumLineSpacing) * 0.5) / (self.itemSpacing + self.itemSize.width);
         [self.mainView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:currentIndex + _dragDirection inSection:0]
@@ -519,7 +519,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
             _dragDirection = 0;
         }
         
-        self.mainView.userInteractionEnabled = NO;
+//        self.mainView.userInteractionEnabled = NO;
         
         NSInteger currentIndex = (_lastOffset.y + (self.flowLayout.itemSize.height + self.flowLayout.minimumLineSpacing) * 0.5) / (self.flowLayout.minimumLineSpacing + self.flowLayout.itemSize.height);
         [self.mainView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:currentIndex + _dragDirection inSection:0]
