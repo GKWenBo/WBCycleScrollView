@@ -60,11 +60,15 @@ NS_ASSUME_NONNULL_BEGIN
                forIndex:(NSInteger)index
         cycleScrollView:(WBCycleScrollView *)view;
 
-/// 滚动偏移量回调
-/// @param offsetX 偏移量
-/// @param view view description
-- (void)cycScrollViewScrollOffset:(NSInteger)offsetX
-                  cycleScrollView:(WBCycleScrollView *)view;
+/// 滚动进度回调
+/// @param realOffsetX 真实滚动x轴偏移量
+/// @param scrollRate 滚动比例（0-1）
+/// @param currentPage 当前页数
+/// @param view 轮播视图
+- (void)cycScrollViewScrollRealOffset:(NSInteger)realOffsetX
+                           scrollRate:(CGFloat)scrollRate
+                          currentPage:(NSInteger)currentPage
+                      cycleScrollView:(WBCycleScrollView *)view;
 
 @end
 

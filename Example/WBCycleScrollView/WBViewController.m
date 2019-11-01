@@ -58,19 +58,12 @@
     NSLog(@"%ld", index);
 }
 
-- (void)cycScrollViewScrollOffset:(NSInteger)offsetX cycleScrollView:(WBCycleScrollView *)view {
-    [self handelBannerBgColorWithOffset:offsetX];
-}
-
-//根据偏移量计算设置banner背景颜色
-- (void)handelBannerBgColorWithOffset:(NSInteger )offset {
+- (void)cycScrollViewScrollRealOffset:(NSInteger)realOffsetX scrollRate:(CGFloat)scrollRate currentPage:(NSInteger)currentPage cycleScrollView:(WBCycleScrollView *)view {
     if (1 == self.changeColors.count) return;
-    NSInteger offsetCurrent = offset % (int)(self.view.bounds.size.width - 10);
-    float rate = offsetCurrent / (self.view.bounds.size.width - 10);
-    NSLog(@"offset  = %ld", offset);
-    NSLog(@"rate  = %f", rate);
-    NSInteger currentPage = offset / (int)(self.view.bounds.size.width - 10);
+ 
     NSLog(@"currentPage  = %ld", currentPage);
+    NSLog(@"rate  = %f", scrollRate);
+    
     UIColor *startPageColor;
     UIColor *endPageColor;
     if (currentPage == self.changeColors.count - 1) {
@@ -83,7 +76,9 @@
         startPageColor = self.changeColors[currentPage];
         endPageColor = self.changeColors[currentPage + 1];
     }
-    UIColor *currentToLastColor = [UIColor getColorWithColor:startPageColor andCoe:rate andEndColor:endPageColor];
+    UIColor *currentToLastColor = [UIColor getColorWithColor:startPageColor
+                                                      andCoe:scrollRate
+                                                 andEndColor:endPageColor];
     self.colorView.backgroundColor = currentToLastColor;
 }
 

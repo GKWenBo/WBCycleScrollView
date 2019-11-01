@@ -16,11 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong) UIImageView *imageView;
 
-/**
- 是否配置
- */
-@property (nonatomic, assign) BOOL hasConfigured;
-
 @end
 
 NS_ASSUME_NONNULL_END

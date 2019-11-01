@@ -396,13 +396,10 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
         cell.imageView.image = image;
     }
     
-    if (!cell.hasConfigured) {
-        cell.imageView.contentMode = self.bannerImageViewContentMode;
-        cell.imageView.layer.cornerRadius = self.imageViewCornerRadius;
-        cell.imageView.layer.masksToBounds = YES;
-        cell.clipsToBounds = YES;
-        cell.hasConfigured = YES;
-    }
+    cell.imageView.contentMode = self.bannerImageViewContentMode;
+    cell.imageView.layer.cornerRadius = self.imageViewCornerRadius;
+    cell.imageView.layer.masksToBounds = YES;
+    cell.clipsToBounds = YES;
     
     return cell;
 }
@@ -430,10 +427,19 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     } else {
         realOffset = (int)currentOffset % (int)totalImagewidth + totalImagewidth;
     }
+    ///步距
+    CGFloat OneStepW = (int)(self.flowLayout.itemSize.width + self.flowLayout.minimumLineSpacing);
+    NSInteger offsetCurrent = (int)realOffset %(int)OneStepW;
+    ///滑动进度
+    CGFloat scrollRate = offsetCurrent / OneStepW;
+    ///当前页
+    NSInteger currentPage = realOffset / (int)OneStepW;
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(cycScrollViewScrollOffset:cycleScrollView:)]) {
-        [self.delegate cycScrollViewScrollOffset:(int)realOffset
-                                 cycleScrollView:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cycScrollViewScrollRealOffset:scrollRate:currentPage:cycleScrollView:)]) {
+        [self.delegate cycScrollViewScrollRealOffset:realOffset
+                                          scrollRate:scrollRate
+                                         currentPage:currentPage
+                                     cycleScrollView:self];
     }
     
     int itemIndex = [self currentIndex];
