@@ -34,18 +34,21 @@
                                   ];
     
     // 网络加载 --- 创建带标题的图片轮播器
-    WBCycleScrollView *cycleScrollView2 = [WBCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 280, w, 180)
+    WBCycleScrollView *cycleScrollView2 = [WBCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 280, w, 200)
                                                                              delegate:self
                                                                      placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cycleScrollView2.imageURLStringsGroup = imagesURLStrings;
-    cycleScrollView2.backgroundColor = [UIColor orangeColor];
+//    cycleScrollView2.backgroundColor = [UIColor orangeColor];
+    ///cell size
     cycleScrollView2.itemSize = CGSizeMake(w - 20, 180);
+    ///左右间距
     cycleScrollView2.itemSpacing = 10;
     cycleScrollView2.imageViewCornerRadius = 6;
+    ///轮播时间间隔
     cycleScrollView2.autoScrollTimeInterval = 5;
     cycleScrollView2.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    cycleScrollView2.isZoom = NO;
-    
+    ///是否缩放
+    cycleScrollView2.isZoom = YES;
     [self.view addSubview:cycleScrollView2];
     
     _colorView = [UIView new];
@@ -58,28 +61,28 @@
     NSLog(@"%ld", index);
 }
 
-- (void)cycScrollViewScrollRealOffset:(NSInteger)realOffsetX scrollRate:(CGFloat)scrollRate currentPage:(NSInteger)currentPage cycleScrollView:(WBCycleScrollView *)view {
+- (void)cycScrollViewScrollRealOffset:(NSInteger)realOffsetX scrollRate:(CGFloat)scrollRate currentPage:(NSInteger)currentPage cycleScrollView:(WBCycleScrollView *)cycleScrollView {
     if (1 == self.changeColors.count) return;
- 
-    NSLog(@"currentPage  = %ld", currentPage);
-    NSLog(@"rate  = %f", scrollRate);
     
-    UIColor *startPageColor;
-    UIColor *endPageColor;
-    if (currentPage == self.changeColors.count - 1) {
-        startPageColor = self.changeColors[currentPage];
-        endPageColor = self.changeColors[0];
-    } else {
-        if (currentPage  == self.changeColors.count) {
-            return;
-        }
-        startPageColor = self.changeColors[currentPage];
-        endPageColor = self.changeColors[currentPage + 1];
-    }
-    UIColor *currentToLastColor = [UIColor getColorWithColor:startPageColor
-                                                      andCoe:scrollRate
-                                                 andEndColor:endPageColor];
-    self.colorView.backgroundColor = currentToLastColor;
+       NSLog(@"currentPage  = %ld", currentPage);
+       NSLog(@"rate  = %f", scrollRate);
+       
+       UIColor *startPageColor;
+       UIColor *endPageColor;
+       if (currentPage == self.changeColors.count - 1) {
+           startPageColor = self.changeColors[currentPage];
+           endPageColor = self.changeColors[0];
+       } else {
+           if (currentPage  == self.changeColors.count) {
+               return;
+           }
+           startPageColor = self.changeColors[currentPage];
+           endPageColor = self.changeColors[currentPage + 1];
+       }
+       UIColor *currentToLastColor = [UIColor getColorWithColor:startPageColor
+                                                         andCoe:scrollRate
+                                                    andEndColor:endPageColor];
+       self.colorView.backgroundColor = currentToLastColor;
 }
 
 - (void)didReceiveMemoryWarning

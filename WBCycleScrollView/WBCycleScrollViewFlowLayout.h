@@ -16,6 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) BOOL isZoom;
 
+/**
+ *  中间那张卡片基于初始大小的缩放倍数，默认为 1.0 isZoom为YES设置有效
+ */
+@property(nonatomic, assign) CGFloat maximumScale;
+
+/**
+ *  除了中间之外的其他卡片基于初始大小的缩放倍数，默认为 0.9 isZoom为YES设置有效
+ */
+@property(nonatomic, assign) CGFloat minimumScale;
+
 @end
 
 NS_ASSUME_NONNULL_END

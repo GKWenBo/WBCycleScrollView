@@ -32,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)cycleScrollView:(WBCycleScrollView *)cycleScrollView
        didScrollToIndex:(NSInteger)index;
 
-
 /**
  自定义轮播cell
 
@@ -64,66 +63,72 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param realOffsetX 真实滚动x轴偏移量
 /// @param scrollRate 滚动比例（0-1）
 /// @param currentPage 当前页数
-/// @param view 轮播视图
+/// @param cycleScrollView 轮播视图
 - (void)cycScrollViewScrollRealOffset:(NSInteger)realOffsetX
                            scrollRate:(CGFloat)scrollRate
                           currentPage:(NSInteger)currentPage
-                      cycleScrollView:(WBCycleScrollView *)view;
+                      cycleScrollView:(WBCycleScrollView *)cycleScrollView;
 
 @end
 
 
 @interface WBCycleScrollView : UIView
 
-// MARK: 便利初始化
+// MARK: - 便利初始化
 + (instancetype)cycleScrollViewWithFrame:(CGRect)frame
                                 delegate:(id<WBCycleScrollViewDelegate>)delegate
                         placeholderImage:(UIImage *)placeholderImage;
 
-// MARK: 数据源设置API
-/** 网络图片 url string 数组 */
+// MARK: - 数据源设置API
+/// 网络图片 url string 数组
 @property (nonatomic, strong) NSArray <NSString *>*imageURLStringsGroup;
-/** 本地图片数组 */
+/// 本地图片数组
 @property (nonatomic, strong) NSArray <NSString *>*localizationImageNamesGroup;
 
-// MARK: 滚动控制API
-/** 自动滚动间隔时间,默认2s */
+// MARK: - 滚动控制API
+/// 自动滚动间隔时间,默认2s
 @property (nonatomic, assign) CGFloat autoScrollTimeInterval;
 
-/** 是否无限循环,默认Yes */
+/// 是否无限循环,默认Yes
 @property (nonatomic, assign) BOOL infiniteLoop;
 
-/** 是否自动滚动,默认Yes */
+/// 是否自动滚动,默认Yes
 @property (nonatomic, assign) BOOL autoScroll;
 
-/** 图片滚动方向，默认为水平滚动 */
+/// 图片滚动方向，默认为水平滚动
 @property (nonatomic, assign) UICollectionViewScrollDirection scrollDirection;
 
 @property (nonatomic, weak) id<WBCycleScrollViewDelegate> delegate;
 
-/** 可以调用此方法手动控制滚动到哪一个index */
+/// 可以调用此方法手动控制滚动到哪一个index
 - (void)makeScrollViewScrollToIndex:(NSInteger)index;
 
-/** 解决viewWillAppear时出现时轮播图卡在一半的问题，在控制器viewWillAppear时调用此方法 */
+/// 解决viewWillAppear时出现时轮播图卡在一半的问题，在控制器viewWillAppear时调用此方法
 - (void)adjustWhenControllerViewWillAppera;
 
 // MARK: 自定义样式API
-/** 轮播图片的ContentMode，默认为 UIViewContentModeScaleToFill */
+/// 轮播图片的ContentMode，默认为 UIViewContentModeScaleToFill
 @property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode;
-/** 占位图，用于网络未加载到图片时 */
+/// 占位图，用于网络未加载到图片时
 @property (nonatomic, strong) UIImage *placeholderImage;
 /** 图片圆角大小 默认：0 */
 @property (nonatomic, assign) CGFloat imageViewCornerRadius;
-/** 是否缩放 默认：NO */
+/// 是否缩放 默认：NO
 @property (nonatomic, assign) BOOL isZoom;
-/** cell大小 默认：父视图大小*/
+/// 中间那张卡片基于初始大小的缩放倍数，默认为 1.0 isZoom为YES设置有效
+@property(nonatomic, assign) CGFloat maximumScale;
+/// 除了中间之外的其他卡片基于初始大小的缩放倍数，默认为 0.9 isZoom为YES设置有效
+@property(nonatomic, assign) CGFloat minimumScale;
+/// cell大小 默认：父视图大小
 @property (nonatomic, assign) CGSize itemSize;
-/** cell大小间距 默认：0 */
+/// cell大小间距 默认：0
 @property (nonatomic, assign) CGFloat itemSpacing;
-/** 是否分页 默认：NO 非infiniteLoop设置有效 */
+/// 是否分页 默认：NO 非infiniteLoop设置有效
 @property (nonatomic, assign) BOOL pagingEnabed;
+/// 滚动时是否开启交互 default：NO
+@property (nonatomic, assign) BOOL scrollUserInteractionEnabled;
 
-/** 滚动手势禁用（文字轮播较实用） */
+/// 滚动手势禁用
 - (void)disableScrollGesture;
 
 /// 销毁定时器
@@ -132,10 +137,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 开始定时器
 - (void)setupTimer;
 
-/** 清除图片缓存（此次升级后统一使用SDWebImage管理图片加载和缓存）  */
+/// 清除图片缓存（此次升级后统一使用SDWebImage管理图片加载和缓存）
 + (void)clearImagesCache;
 
-/** 清除图片缓存（兼容旧版本方法） */
+/// 清除图片缓存（兼容旧版本方法）
 - (void)clearCache;
 
 @end

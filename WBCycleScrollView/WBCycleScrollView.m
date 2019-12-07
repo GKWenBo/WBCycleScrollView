@@ -75,6 +75,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     _infiniteLoop = YES;
     _pagingEnabed = NO;
     _bannerImageViewContentMode = UIViewContentModeScaleToFill;
+    _scrollUserInteractionEnabled = NO;
     self.backgroundColor = [UIColor lightGrayColor];
 }
 
@@ -127,7 +128,10 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
         
         
         _lastOffset = self.mainView.contentOffset;
-//        self.mainView.userInteractionEnabled = YES;
+        if (self.scrollUserInteractionEnabled) {
+            self.mainView.userInteractionEnabled = YES;
+        }
+
     }
 }
 
@@ -253,6 +257,18 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     self.flowLayout.isZoom = isZoom;
 }
 
+- (void)setMinimumScale:(CGFloat)minimumScale {
+    _minimumScale = minimumScale;
+    
+    self.flowLayout.minimumScale = minimumScale;
+}
+
+- (void)setMaximumScale:(CGFloat)maximumScale {
+    _maximumScale = maximumScale;
+    
+    self.flowLayout.maximumScale = maximumScale;
+}
+
 - (void)setPagingEnabed:(BOOL)pageEnabed {
     _pagingEnabed = pageEnabed;
     if (!self.infiniteLoop) {
@@ -276,7 +292,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
 }
 
 - (void)setupTimer {
-    //// 创建定时器前先停止定时器，不然会出现僵尸定时器，导致轮播频率错误
+    /// 创建定时器前先停止定时器，不然会出现僵尸定时器，导致轮播频率错误
     [self invalidateTimer];
     
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoScrollTimeInterval
@@ -416,7 +432,9 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     //解决清除timer时偶尔会出现的问题
     if (!self.imagePathsGroup.count) return;
     
-//    self.mainView.userInteractionEnabled = NO;
+    if (self.scrollUserInteractionEnabled) {
+        self.mainView.userInteractionEnabled = NO;
+    }
     
     //滚动偏移量
     CGFloat totalImagewidth = (self.flowLayout.itemSize.width + self.flowLayout.minimumLineSpacing) * self.imagePathsGroup.count;
@@ -467,7 +485,10 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-//    self.mainView.userInteractionEnabled = YES;
+    if (self.scrollUserInteractionEnabled) {
+        self.mainView.userInteractionEnabled = YES;
+    }
+    
     //解决清除timer时偶尔会出现的问题
     if (!self.imagePathsGroup.count) return;
     
@@ -497,7 +518,10 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
         }else {
             _dragDirection = 0;
         }
-//        self.mainView.userInteractionEnabled = NO;
+        
+        if (self.scrollUserInteractionEnabled) {
+            self.mainView.userInteractionEnabled = NO;
+        }
         
         NSInteger currentIndex = (_lastOffset.x + (self.flowLayout.itemSize.width + self.flowLayout.minimumLineSpacing) * 0.5) / (self.itemSpacing + self.itemSize.width);
         [self.mainView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:currentIndex + _dragDirection inSection:0]
@@ -518,7 +542,9 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
             _dragDirection = 0;
         }
         
-//        self.mainView.userInteractionEnabled = NO;
+        if (self.scrollUserInteractionEnabled) {
+            self.mainView.userInteractionEnabled = NO;
+        }
         
         NSInteger currentIndex = (_lastOffset.y + (self.flowLayout.itemSize.height + self.flowLayout.minimumLineSpacing) * 0.5) / (self.flowLayout.minimumLineSpacing + self.flowLayout.itemSize.height);
         [self.mainView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:currentIndex + _dragDirection inSection:0]
