@@ -141,7 +141,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     }
 }
 
-// MARK: setter
+// MARK: - setter
 - (void)setDelegate:(id<WBCycleScrollViewDelegate>)delegate {
     _delegate = delegate;
     if ([self.delegate respondsToSelector:@selector(customCollectionViewCellClassForCycleScrollView:)] && [self.delegate customCollectionViewCellClassForCycleScrollView:self]) {
@@ -381,7 +381,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     }
 }
 
-// MARK: UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return _totalItemsCount;
 }
@@ -427,7 +427,7 @@ static NSString *kIdentifier = @"WBCycleScrollViewCell";
     }
 }
 
-// MARK: UIScrollViewDelegate
+// MARK: - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     //解决清除timer时偶尔会出现的问题
     if (!self.imagePathsGroup.count) return;

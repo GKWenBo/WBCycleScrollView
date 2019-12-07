@@ -38,7 +38,6 @@
                                                                              delegate:self
                                                                      placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cycleScrollView2.imageURLStringsGroup = imagesURLStrings;
-//    cycleScrollView2.backgroundColor = [UIColor orangeColor];
     ///cell size
     cycleScrollView2.itemSize = CGSizeMake(w - 20, 180);
     ///左右间距

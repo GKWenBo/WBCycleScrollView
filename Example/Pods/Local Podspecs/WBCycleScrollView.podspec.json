@@ -1,6 +1,6 @@
 {
   "name": "WBCycleScrollView",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "summary": "图片无限轮播视图，支持cell自定义大小，间距",
   "homepage": "https://github.com/wenmobo/WBCycleScrollView",
   "license": {
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/wenmobo/WBCycleScrollView.git",
-    "tag": "0.4.0"
+    "tag": "1.0.0"
   },
   "platforms": {
     "ios": "8.0"

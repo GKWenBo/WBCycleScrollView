@@ -1,9 +1,11 @@
+source 'https://cdn.cocoapods.org/'
 use_frameworks!
 
 platform :ios, '8.0'
 
 target 'WBCycleScrollView_Example' do
   pod 'WBCycleScrollView', :path => '../'
+  pod 'WBCategoryKit'
 
   target 'WBCycleScrollView_Tests' do
     inherit! :search_paths

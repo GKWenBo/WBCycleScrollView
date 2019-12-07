@@ -106,12 +106,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 解决viewWillAppear时出现时轮播图卡在一半的问题，在控制器viewWillAppear时调用此方法
 - (void)adjustWhenControllerViewWillAppera;
 
-// MARK: 自定义样式API
+// MARK: - 自定义样式API
 /// 轮播图片的ContentMode，默认为 UIViewContentModeScaleToFill
 @property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode;
 /// 占位图，用于网络未加载到图片时
 @property (nonatomic, strong) UIImage *placeholderImage;
-/** 图片圆角大小 默认：0 */
+/// 图片圆角大小 默认：0
 @property (nonatomic, assign) CGFloat imageViewCornerRadius;
 /// 是否缩放 默认：NO
 @property (nonatomic, assign) BOOL isZoom;
