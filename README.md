@@ -58,10 +58,14 @@
 - iPhone
 - Xcode 8+
 
+## 更新日志：
+
+2019-12-08：新增滑动关闭交互属性，添加缩放比例设置属性，代码风格优化
+
 ## Author
 
-author：wenbo
-email：[wenmobo2018@gmail.com](mailto:wenmobo2018@gmail.com)
-掘金：https://juejin.im/user/5a371ae551882512d0607108
-简书：https://www.jianshu.com/u/63445e24e8bf
+author：wenbo	
+email：[wenmobo2018@gmail.com](mailto:wenmobo2018@gmail.com)		
+掘金：https://juejin.im/user/5a371ae551882512d0607108		
+简书：https://www.jianshu.com/u/63445e24e8bf		
 
