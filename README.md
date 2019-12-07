@@ -64,8 +64,12 @@
 
 ## Author
 
-author：wenbo	
-email：[wenmobo2018@gmail.com](mailto:wenmobo2018@gmail.com)		
+author：wenmobo	
+
+email：[wenmobo2018@gmail.com](mailto:wenmobo2018@gmail.com)
+
+
 掘金：https://juejin.im/user/5a371ae551882512d0607108		
+
 简书：https://www.jianshu.com/u/63445e24e8bf		
 
