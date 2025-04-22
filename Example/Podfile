@@ -1,7 +1,7 @@
 source 'https://cdn.cocoapods.org/'
 use_frameworks!
 
-platform :ios, '8.0'
+platform :ios, '12.0'
 
 target 'WBCycleScrollView_Example' do
   pod 'WBCycleScrollView', :path => '../'

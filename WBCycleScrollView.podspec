@@ -14,10 +14,13 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'wenmobo' => 'wenmobo2018@gmail.com' }
   s.source           = { :git => 'https://github.com/wenmobo/WBCycleScrollView.git', :tag => s.version.to_s }
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '12.0'
   s.requires_arc = true
 
-  s.source_files = 'WBCycleScrollView/**/*'
+  s.source_files = 'WBCycleScrollView/*.{h,m}'
+  s.resource_bundles = {
+    'WBCycleScrollView' => ['WBCycleScrollView/PrivacyInfo.xcprivacy']
+  }
   
   s.frameworks = 'UIKit'
   s.dependency 'SDWebImage', '>= 5.0.0'
