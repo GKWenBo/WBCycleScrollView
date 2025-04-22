@@ -54,9 +54,9 @@
 ## Remind
 
 - ARC
-- iOS>=8.0
+- iOS>=12.0
 - iPhone
-- Xcode 8+
+- Xcode 16+
 
 ## 更新日志：
 2025-04.22：Swift Package
