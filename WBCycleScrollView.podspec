@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WBCycleScrollView'
-  s.version          = '1.0.0'
+  s.version          = '1.1.0'
   s.summary          = '图片无限轮播视图，支持cell自定义大小，间距'
   s.homepage         = 'https://github.com/wenmobo/WBCycleScrollView'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
